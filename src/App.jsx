@@ -1,10 +1,17 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { FaWhatsapp, FaPhone, FaEnvelope } from "react-icons/fa";
 
 // === Site Relamping LED – One‑page React app (TailwindCSS-ready) ===
 // FRH Pro – fusion complète avec Header/WhatsApp/Formulaire pro/Galerie/Footer/CTA
 
 export default function SiteRelampingLED() {
+  const slides = ["/photo1.jpg", "/photo2.jpg", "/photo3.jpg"];
+const [idx, setIdx] = useState(0);
+useEffect(() => {
+  const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 4000);
+  return () => clearInterval(t);
+}, []);
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <TopBar />
@@ -134,26 +141,23 @@ function Hero() {
           </ul>
         </div>
         <div className="relative">
-          <div className="aspect-[4/3] w-full rounded-3xl bg-white shadow-xl border grid place-items-center p-6">
-            {/* Illustration simple */}
-            <svg viewBox="0 0 200 150" className="w-full h-full">
-              <defs>
-                <linearGradient id="g" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#10b981" />
-                  <stop offset="100%" stopColor="#34d399" />
-                </linearGradient>
-              </defs>
-              <rect x="10" y="20" width="180" height="60" rx="8" fill="url(#g)" opacity="0.25" />
-              <rect x="10" y="90" width="180" height="40" rx="8" fill="#e5e7eb" />
-              <circle cx="35" cy="110" r="8" fill="#10b981" />
-              <circle cx="65" cy="110" r="8" fill="#10b981" />
-              <circle cx="95" cy="110" r="8" fill="#10b981" />
-              <rect x="115" y="105" width="70" height="10" rx="5" fill="#9ca3af" />
-            </svg>
-          </div>
-          <p className="mt-3 text-center text-sm text-gray-500">Avant/Après relamping • Flux lumineux homogène • Consommation réduite</p>
-        </div>
-      </div>
+  <img
+    src={slides[idx]}
+    alt={`Réalisation ${idx + 1}`}
+    className="aspect-[4/3] w-full rounded-3xl shadow-xl border object-cover"
+  />
+  <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+    {slides.map((_, i) => (
+      <span
+        key={i}
+        className={`h-2.5 w-2.5 rounded-full ${
+          i === idx ? "bg-emerald-600" : "bg-white/70"
+        }`}
+      />
+    ))}
+  </div>
+</div>
+
     </section>
   );
 }
