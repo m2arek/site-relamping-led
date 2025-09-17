@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
+import { FaWhatsapp, FaPhone, FaEnvelope } from "react-icons/fa";
 
 // === Site Relamping LED – One‑page React app (TailwindCSS-ready) ===
-// Astuce : remplace les éléments TODO (nom, téléphone, email, WhatsApp, logo, couleurs)
-// Hébergeable tel quel sur Vercel/Netlify en mode SPA. Pas de dépendances externes.
+// FRH Pro – fusion complète avec Header/WhatsApp/Formulaire pro/Galerie/Footer/CTA
 
 export default function SiteRelampingLED() {
   return (
@@ -17,6 +17,7 @@ export default function SiteRelampingLED() {
         <Eligibility />
         <Calculator />
         <CaseStudies />
+        <Gallery />
         <FAQ />
         <About />
         <Contact />
@@ -33,7 +34,7 @@ function TopBar() {
   return (
     <div className="w-full bg-emerald-700 text-white text-sm">
       <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
-        <span>Intervention en Corse & DOM‑TOM • Audit gratuit • Dossier CEE pris en charge</span>
+        <span>FRH Pro • Intervention en Corse & DOM‑TOM • Audit gratuit • Dossier CEE pris en charge</span>
         <a href="#contact" className="underline underline-offset-4">Demander un audit</a>
       </div>
     </div>
@@ -48,6 +49,7 @@ function Header() {
     { href: "#eligibilite", label: "Éligibilité" },
     { href: "#calculateur", label: "Calculateur" },
     { href: "#realisations", label: "Réalisations" },
+    { href: "#galerie", label: "Galerie" },
     { href: "#faq", label: "FAQ" },
     { href: "#apropos", label: "À propos" },
     { href: "#contact", label: "Contact" },
@@ -56,13 +58,11 @@ function Header() {
     <header className="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-gray-200">
       <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
         <a href="#accueil" className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-2xl bg-emerald-600 text-white grid place-items-center shadow-md">
-            {/* TODO: Remplacer par votre logo */}
-            <span className="font-bold">LED</span>
-          </div>
+          {/* Logo */}
+          <img src="/LOGO_FRH.png" alt="FRH Pro" className="h-10 w-auto" />
           <div className="leading-tight">
-            <div className="font-semibold">Relamping à 0€</div>
-            <div className="text-xs text-gray-500">CEE • Corse & DOM‑TOM</div>
+            <div className="font-semibold">FRH Pro</div>
+            <div className="text-xs text-gray-500">Relamping LED • Corse & DOM‑TOM</div>
           </div>
         </a>
         <nav className="hidden md:flex items-center gap-6">
@@ -71,8 +71,17 @@ function Header() {
               {n.label}
             </a>
           ))}
-          <a href="#contact" className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700">
-            Audit gratuit
+          <a
+            href="tel:+33695151031"
+            className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700"
+          >
+            <FaPhone /> 06 95 15 10 31
+          </a>
+          <a
+            href="https://wa.me/33695151031"
+            className="inline-flex items-center gap-2 rounded-xl bg-green-500 px-4 py-2 text-white shadow hover:bg-green-600"
+          >
+            <FaWhatsapp /> WhatsApp
           </a>
         </nav>
         <button onClick={() => setOpen(!open)} className="md:hidden rounded-xl border px-3 py-2 text-sm">
@@ -87,9 +96,14 @@ function Header() {
                 {n.label}
               </a>
             ))}
-            <a href="#contact" className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-2 text-white shadow">
-              Audit gratuit
-            </a>
+            <div className="flex gap-2 pt-2">
+              <a href="tel:+33695151031" className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-white shadow">
+                <FaPhone /> Appeler
+              </a>
+              <a href="https://wa.me/33695151031" className="inline-flex items-center gap-2 rounded-xl bg-green-500 px-4 py-2 text-white shadow">
+                <FaWhatsapp /> WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       )}
@@ -169,22 +183,10 @@ function Stat({ title, value, note }) {
 
 function Benefits() {
   const items = [
-    {
-      title: "Jusqu’à 70% d’économies",
-      desc: "Des luminaires LED haute efficacité qui divisent la consommation et la maintenance.",
-    },
-    {
-      title: "Financement CEE",
-      desc: "Montage de dossier pris en charge. Couverture possible jusqu’à 100% selon cas.",
-    },
-    {
-      title: "Confort & sécurité",
-      desc: "Éclairage instantané, rendu des couleurs élevé, conformité aux normes en vigueur.",
-    },
-    {
-      title: "Installation clé en main",
-      desc: "Audit, fourniture, pose, recyclage des anciens matériels, garanties.",
-    },
+    { title: "Jusqu’à 70% d’économies", desc: "Des luminaires LED haute efficacité qui divisent la consommation et la maintenance." },
+    { title: "Financement CEE", desc: "Montage de dossier pris en charge. Couverture possible jusqu’à 100% selon cas." },
+    { title: "Confort & sécurité", desc: "Éclairage instantané, rendu des couleurs élevé, conformité aux normes en vigueur." },
+    { title: "Installation clé en main", desc: "Audit, fourniture, pose, recyclage des anciens matériels, garanties." },
   ];
   return (
     <section id="offre" className="py-16 bg-white">
@@ -208,22 +210,10 @@ function Benefits() {
 
 function Process() {
   const steps = [
-    {
-      title: "Audit gratuit",
-      desc: "Relevé des points lumineux, puissances, usages, horaires. Conseil sur la photométrie.",
-    },
-    {
-      title: "Dossier CEE",
-      desc: "Montage administratif et technique, calcul de primes, engagement de l’obligé.",
-    },
-    {
-      title: "Installation",
-      desc: "Planification, pose, mise en service, recyclage des anciens équipements.",
-    },
-    {
-      title: "Contrôle & garanties",
-      desc: "Vérifications, attestation sur l’honneur, garanties produit & main d’œuvre.",
-    },
+    { title: "Audit gratuit", desc: "Relevé des points lumineux, puissances, usages, horaires. Conseil sur la photométrie." },
+    { title: "Dossier CEE", desc: "Montage administratif et technique, calcul de primes, engagement de l’obligé." },
+    { title: "Installation", desc: "Planification, pose, mise en service, recyclage des anciens équipements." },
+    { title: "Contrôle & garanties", desc: "Vérifications, attestation sur l’honneur, garanties produit & main d’œuvre." },
   ];
   return (
     <section id="process" className="py-16">
@@ -322,11 +312,11 @@ function QuickCheckForm() {
 function Calculator() {
   const [inputs, setInputs] = useState({
     nb: "50",
-    wOld: "72", // ancien néon/fluos
-    wNew: "24", // LED
+    wOld: "72",
+    wNew: "24",
     hPerDay: "10",
     dPerYear: "260",
-    price: "0.20", // €/kWh (à adapter)
+    price: "0.20",
   });
 
   const results = useMemo(() => {
@@ -418,24 +408,34 @@ function CaseStudies() {
   );
 }
 
+function Gallery() {
+  const photos = [
+    { src: "/photo1.jpg", alt: "Projet FRH Pro 1" },
+    { src: "/photo2.jpg", alt: "Projet FRH Pro 2" },
+    { src: "/photo3.jpg", alt: "Projet FRH Pro 3" },
+  ];
+  return (
+    <section id="galerie" className="py-16 bg-white border-y">
+      <div className="mx-auto max-w-7xl px-4">
+        <h2 className="text-2xl md:text-3xl font-bold">Galerie de réalisations</h2>
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
+          {photos.map((p) => (
+            <div key={p.src} className="rounded-2xl border bg-gray-50 shadow-sm overflow-hidden">
+              <img src={p.src} alt={p.alt} className="w-full h-64 object-cover" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FAQ() {
   const qa = [
-    {
-      q: "C’est vraiment 0€ ?",
-      a: "Selon votre site et les fiches CEE applicables, la prime peut couvrir jusqu’à 100% du projet. Quand la prime ne couvre pas tout, nous optimisons le lot pour viser un reste à charge minimal.",
-    },
-    {
-      q: "Combien de temps ça prend ?",
-      a: "Après validation du dossier CEE, l’installation est généralement planifiée sous 10 à 20 jours ouvrés selon disponibilités et contraintes du site.",
-    },
-    {
-      q: "Qui s’occupe du dossier CEE ?",
-      a: "Nous prenons en charge le montage complet : relevés, calculs, engagement de l’obligé, pièces justificatives et attestations.",
-    },
-    {
-      q: "Quelles garanties ?",
-      a: "Produits LED sélectionnés avec garanties fabricant (souvent 3 à 5 ans) et intervention soignée. Possibilité de contrat de maintenance.",
-    },
+    { q: "C’est vraiment 0€ ?", a: "Selon votre site et les fiches CEE applicables, la prime peut couvrir jusqu’à 100% du projet. Quand la prime ne couvre pas tout, nous optimisons le lot pour viser un reste à charge minimal." },
+    { q: "Combien de temps ça prend ?", a: "Après validation du dossier CEE, l’installation est généralement planifiée sous 10 à 20 jours ouvrés selon disponibilités et contraintes du site." },
+    { q: "Qui s’occupe du dossier CEE ?", a: "Nous prenons en charge le montage complet : relevés, calculs, engagement de l’obligé, pièces justificatives et attestations." },
+    { q: "Quelles garanties ?", a: "Produits LED sélectionnés avec garanties fabricant (souvent 3 à 5 ans) et intervention soignée. Possibilité de contrat de maintenance." },
   ];
   return (
     <section id="faq" className="py-16">
@@ -483,63 +483,57 @@ function About() {
   );
 }
 
+// === Contact (formulaire professionnel + envoi mailto) ===
 function Contact() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const entreprise = form.entreprise.value;
+    const responsable = form.responsable.value;
+    const telephone = form.telephone.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    const mailtoLink = `mailto:contact@frh-pro.fr?subject=Demande%20de%20contact%20(${entreprise})&body=Entreprise:%20${entreprise}%0ANom%20du%20responsable:%20${responsable}%0ATéléphone:%20${telephone}%0AEmail:%20${email}%0A%0AMessage:%0A${message}`;
+
+    window.location.href = mailtoLink;
+  };
+
   return (
     <section id="contact" className="py-16">
       <div className="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-10 items-start">
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold">Contact & audit gratuit</h2>
+          <h2 className="text-2xl md:text-3xl font-bold">Contact Professionnel</h2>
           <p className="mt-3 text-gray-600">Parlez‑nous de votre site et recevez une estimation d’économies et de prime CEE.</p>
           <div className="mt-6 space-y-2 text-gray-700">
-            <div>📞 <span className="font-medium">Téléphone :</span> <a className="underline" href="tel:+33000000000">+33 0 00 00 00 00</a> {/* TODO */}</div>
-            <div>✉️ <span className="font-medium">Email :</span> <a className="underline" href="mailto:contact@votre-domaine.fr">contact@votre-domaine.fr</a> {/* TODO */}</div>
-            <div>💬 <span className="font-medium">WhatsApp :</span> <a className="underline" href="https://wa.me/33000000000" target="_blank" rel="noreferrer">Discuter maintenant</a> {/* TODO */}</div>
+            <div><FaPhone className="inline mr-2" /> <span className="font-medium">Téléphone :</span> <a className="underline" href="tel:+33695151031">06 95 15 10 31</a></div>
+            <div><FaEnvelope className="inline mr-2" /> <span className="font-medium">Email :</span> <a className="underline" href="mailto:contact@frh-pro.fr">contact@frh-pro.fr</a></div>
+            <div><FaWhatsapp className="inline mr-2" /> <span className="font-medium">WhatsApp :</span> <a className="underline" href="https://wa.me/33695151031" target="_blank" rel="noreferrer">Discuter maintenant</a></div>
           </div>
         </div>
-        <ContactForm />
-      </div>
-    </section>
-  );
-}
-
-function ContactForm() {
-  const [form, setForm] = useState({ nom: "", entreprise: "", email: "", tel: "", message: "" });
-  const [sent, setSent] = useState(false);
-  return (
-    <div className="rounded-2xl border bg-gray-50 p-6 shadow-sm">
-      {!sent ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            // Ici, branchement vers un backend / Zapier / Formspree / EmailJS
-            setSent(true);
-          }}
-          className="grid gap-4"
-        >
-          <Field label="Nom">
-            <input required className="w-full rounded-xl border px-3 py-2" value={form.nom} onChange={(e) => setForm({ ...form, nom: e.target.value })} />
+        <form onSubmit={handleSubmit} className="rounded-2xl border bg-gray-50 p-6 shadow-sm grid gap-4">
+          <Field label="Nom de l'entreprise">
+            <input name="entreprise" required className="w-full rounded-xl border px-3 py-2" />
           </Field>
-          <Field label="Entreprise">
-            <input className="w-full rounded-xl border px-3 py-2" value={form.entreprise} onChange={(e) => setForm({ ...form, entreprise: e.target.value })} />
+          <Field label="Nom du responsable">
+            <input name="responsable" required className="w-full rounded-xl border px-3 py-2" />
           </Field>
           <div className="grid sm:grid-cols-2 gap-4">
-            <Field label="Email">
-              <input type="email" required className="w-full rounded-xl border px-3 py-2" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-            </Field>
             <Field label="Téléphone">
-              <input className="w-full rounded-xl border px-3 py-2" value={form.tel} onChange={(e) => setForm({ ...form, tel: e.target.value })} />
+              <input name="telephone" required className="w-full rounded-xl border px-3 py-2" />
+            </Field>
+            <Field label="Email">
+              <input type="email" name="email" required className="w-full rounded-xl border px-3 py-2" />
             </Field>
           </div>
-          <Field label="Votre besoin">
-            <textarea rows={4} className="w-full rounded-xl border px-3 py-2" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Ex : relamping magasin 300 m², 80 luminaires, ouvert 6 j/7…" />
+          <Field label="Votre message">
+            <textarea name="message" rows={4} className="w-full rounded-xl border px-3 py-2" required />
           </Field>
-          <button className="rounded-2xl bg-emerald-600 px-5 py-2.5 text-white shadow hover:bg-emerald-700">Envoyer</button>
+          <button type="submit" className="rounded-2xl bg-emerald-600 px-5 py-2.5 text-white shadow hover:bg-emerald-700">Envoyer</button>
           <p className="text-xs text-gray-500">En envoyant ce formulaire, vous acceptez d’être recontacté. Aucune donnée partagée à des tiers.</p>
         </form>
-      ) : (
-        <div className="text-emerald-700 font-medium">Merci ! Votre demande a été enregistrée. Nous revenons vers vous très vite.</div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 }
 
@@ -562,16 +556,38 @@ function Footer() {
   return (
     <footer className="border-t bg-white">
       <div className="mx-auto max-w-7xl px-4 py-8 grid md:grid-cols-3 gap-6 items-center">
+        {/* Bloc infos société */}
         <div>
-          <div className="font-semibold">Votre entreprise {/* TODO: nom */}</div>
-          <div className="text-sm text-gray-500">Relamping LED • CEE • Corse & DOM‑TOM</div>
+          <div className="font-semibold">FRH Pro</div>
+          <div className="text-sm text-gray-500">Relamping LED • CEE • Corse & DOM-TOM</div>
         </div>
+
+        {/* Bloc copyright */}
         <div className="text-sm text-gray-600">
-          © {new Date().getFullYear()} • Tous droits réservés • <a className="underline" href="#">Mentions légales</a>
+          © {new Date().getFullYear()} • Tous droits réservés • {" "}
+          <a className="underline" href="#">Mentions légales</a>
         </div>
+
+        {/* Bloc contact */}
         <div className="flex gap-3 justify-start md:justify-end">
-          <a href="#contact" className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700">Contact</a>
-          <a href="https://wa.me/33000000000" className="rounded-xl bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700">WhatsApp</a>
+          <a
+            href="mailto:contact@frh-pro.fr"
+            className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700"
+          >
+            contact@frh-pro.fr
+          </a>
+          <a
+            href="tel:+33695151031"
+            className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700"
+          >
+            06 95 15 10 31
+          </a>
+          <a
+            href="https://wa.me/33695151031"
+            className="rounded-xl bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700"
+          >
+            WhatsApp
+          </a>
         </div>
       </div>
     </footer>
@@ -608,4 +624,3 @@ function KPI({ label, value }) {
 function fmt(n) {
   return (Math.round(n * 100) / 100).toLocaleString("fr-FR");
 }
-
