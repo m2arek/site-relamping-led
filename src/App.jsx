@@ -119,6 +119,15 @@ function Header() {
 }
 
 function Hero() {
+  // mini-carrousel ultra simple
+  const slides = ["/photo1.jpg", "/photo2.jpg", "/photo3.jpg"];
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 4000);
+    return () => clearInterval(t);
+  }, [slides.length]);
+
   return (
     <section id="accueil" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-emerald-100 via-white to-white" />
@@ -128,7 +137,7 @@ function Hero() {
             Éclairez vos locaux <span className="text-emerald-700">sans avance de frais</span><br /> grâce au dispositif CEE
           </h1>
           <p className="mt-5 text-lg text-gray-600">
-            Relamping LED clé en main pour entreprises, commerces et collectivités en Corse et DOM‑TOM. Financement possible jusqu’à 100% via les Certificats d’Économies d’Énergie.
+            Relamping LED clé en main pour entreprises, commerces et collectivités en Corse et DOM-TOM. Financement possible jusqu’à 100% via les Certificats d’Économies d’Énergie.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="#contact" className="rounded-2xl bg-emerald-600 px-6 py-3 text-white shadow hover:bg-emerald-700">Demander un audit gratuit</a>
@@ -140,24 +149,35 @@ function Hero() {
             <li className="flex items-center gap-2">✅ Installation rapide & propre</li>
           </ul>
         </div>
-        <div className="relative">
-  <img
-    src={slides[idx]}
-    alt={`Réalisation ${idx + 1}`}
-    className="aspect-[4/3] w-full rounded-3xl shadow-xl border object-cover"
-  />
-  <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
-    {slides.map((_, i) => (
-      <span
-        key={i}
-        className={`h-2.5 w-2.5 rounded-full ${
-          i === idx ? "bg-emerald-600" : "bg-white/70"
-        }`}
-      />
-    ))}
-  </div>
-</div>
 
+        {/* Bloc image remplacé par un carrousel simple */}
+        <div className="relative">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-xl border">
+            {/* slide courante */}
+            <img
+              src={slides[idx]}
+              alt={`Réalisation ${idx + 1}`}
+              className="h-full w-full object-cover"
+            />
+            {/* points */}
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIdx(i)}
+                  className={`h-2.5 w-2.5 rounded-full transition ${
+                    i === idx ? "bg-emerald-600" : "bg-white/70 hover:bg-white"
+                  }`}
+                  aria-label={`Aller à l'image ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+          <p className="mt-3 text-center text-sm text-gray-500">
+            Exemples de réalisations • Relamping LED • Économies d’énergie
+          </p>
+        </div>
+      </div>
     </section>
   );
 }
