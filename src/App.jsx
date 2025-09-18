@@ -82,7 +82,7 @@ function Header() {
             href="tel:+33695151031"
             className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700"
           >
-            <FaPhone /> 06 95 15 10 31
+            <FaPhone /> 0695151031
           </a>
           <a
             href="https://wa.me/33695151031"
