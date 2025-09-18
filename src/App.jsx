@@ -604,7 +604,7 @@ function Footer() {
             href="tel:+33695151031"
             className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700"
           >
-            06 95 15 10 31
+            0695151031
           </a>
           <a
             href="https://wa.me/33695151031"
