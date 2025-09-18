@@ -28,7 +28,7 @@ useEffect(() => {
         <FAQ />
         <About />
         <Contact />
-        <Legal />
+        <MentionsLegales />
       </main>
       <Footer />
       <FloatingCTA />
@@ -561,57 +561,99 @@ function Contact() {
   );
 }
 
-function Legal() {
+function MentionsLegales() {
   return (
-    <section className="py-10">
-      <div className="mx-auto max-w-7xl px-4 rounded-2xl border bg-white p-6 shadow-sm text-sm text-gray-600">
-        <h3 className="font-semibold">Mentions utiles (résumé)</h3>
-        <ul className="mt-2 list-disc list-inside">
-          <li>Les montants de prime CEE et les taux de prise en charge dépendent des fiches standardisées applicables, de vos usages et de la conformité du dossier.</li>
-          <li>Le « 0€ » peut s’appliquer lorsque la prime couvre l’intégralité du projet. À défaut, un reste à charge peut subsister.</li>
-          <li>Interventions en Corse & DOM‑TOM, sous réserve de disponibilité et contraintes logistiques locales.</li>
-        </ul>
+    <section id="mentions-legales" className="py-16 bg-white border-y">
+      <div className="mx-auto max-w-4xl px-4">
+        <h2 className="text-2xl md:text-3xl font-bold">Mentions légales</h2>
+
+        <div className="mt-6 space-y-4 text-sm leading-relaxed text-gray-700">
+          {/* Informations légales */}
+          <h3 className="text-lg font-semibold mt-4">Informations légales</h3>
+          <p>
+            Le site, accessible à l’adresse URL <a className="underline" href="https://www.frh-pro.fr" target="_blank" rel="noreferrer">www.frh-pro.fr</a> (ci-après le « Site ») est édité par
+            <strong> FRANCE RENOV HABITAT ENVIRONNEMENT</strong> (ci-après l’« Éditeur »), exerçant sous la forme d’une société par actions simplifiée à associé unique,
+            au capital social de 30 000,00 €, dont le siège social est situé au 196 avenue Jean Lolive, 93500 Pantin, immatriculée au RCS de Bobigny sous le numéro
+            890 493 737 (SIRET 89049373700013), TVA intracommunautaire FR 868 279 583 98.
+          </p>
+          <p>
+            Numéro de téléphone (site) : <a className="underline" href="tel:+33695151031">06 95 15 10 31</a> — Adresse e-mail : <a className="underline" href="mailto:contact@frh-pro.fr">contact@frh-pro.fr</a><br/>
+            Directeur de la publication : Monsieur Ilan Cohen.
+          </p>
+          <p>
+            <strong>Hébergeur :</strong> Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA — <a className="underline" href="https://vercel.com" target="_blank" rel="noreferrer">vercel.com</a>.<br/>
+            <strong>Prestataire du nom de domaine :</strong> OVHcloud, 2 rue Kellermann, 59100 Roubaix, France — RCS Lille 424 761 419.
+          </p>
+
+          {/* Responsabilité */}
+          <h3 className="text-lg font-semibold mt-6">Responsabilité</h3>
+          <p>
+            FRANCE RENOV HABITAT ENVIRONNEMENT met tout en œuvre pour offrir aux utilisateurs des informations et outils disponibles et vérifiés.
+            Néanmoins, l’Éditeur ne saurait être tenu responsable d’une absence de disponibilité des informations et/ou de la présence de virus
+            ou autres infections logiques sur le Site. L’utilisateur reconnaît utiliser les informations et outils disponibles sur le Site sous sa
+            responsabilité exclusive.
+          </p>
+
+          {/* Données personnelles */}
+          <h3 className="text-lg font-semibold mt-6">Protection des données à caractère personnel</h3>
+          <p>
+            Conformément à la réglementation en vigueur, l’Éditeur met en œuvre un traitement de données à caractère personnel.
+            Les données sont destinées aux membres habilités de FRANCE RENOV HABITAT ENVIRONNEMENT, à l’Éditeur et à ses sous-traitants.
+            L’utilisateur dispose d’un droit d’opposition, de limitation, d’accès, de rectification, de portabilité et d’effacement de ses données.
+            Il peut également donner des directives sur le sort de ses données après son décès.
+          </p>
+          <p>
+            Les données peuvent être conservées pendant la relation contractuelle et jusqu’à trois ans après sa fin.
+            Pour exercer ses droits, l’utilisateur adresse sa demande, accompagnée d’un justificatif d’identité comportant sa signature, à
+            <a className="underline" href="mailto:contact@francerenovhabitat.com"> contact@francerenovhabitat.com</a> ou par courrier à :
+            FRANCE RENOV HABITAT ENVIRONNEMENT, 196 avenue Jean Lolive, 93500 Pantin.
+            Pour toute information complémentaire, il peut contacter le DPO à <a className="underline" href="mailto:contact@francerenovhabitat.com">contact@francerenovhabitat.com</a>.
+          </p>
+
+          {/* Propriété intellectuelle */}
+          <h3 className="text-lg font-semibold mt-6">Propriété intellectuelle</h3>
+          <p>
+            L’Éditeur est titulaire des droits de propriété intellectuelle du Site pris dans sa globalité ainsi que de chacun des éléments qui le composent
+            (charte graphique, arborescence, interfaces, bases de données, contenus, textes, images, fichiers, etc.).
+            Toute représentation ou reproduction, totale ou partielle, sans autorisation expresse de l’Éditeur est interdite
+            et constituerait une contrefaçon (articles L.335-2 et s. CPI). Les bases de données sont protégées (articles L.341-1 et s. CPI).
+            Les marques et logotypes figurant sur le Site sont déposés ; toute reproduction non autorisée engage la responsabilité de l’auteur.
+          </p>
+
+          {/* Liens */}
+          <h3 className="text-lg font-semibold mt-6">Liens</h3>
+          <p>
+            Tout lien profond vers le Site est soumis à l’autorisation préalable et écrite de FRANCE RENOV HABITAT ENVIRONNEMENT.
+          </p>
+
+          {/* Loi applicable */}
+          <h3 className="text-lg font-semibold mt-6">Loi applicable</h3>
+          <p>
+            Le présent Site est régi par la loi française.
+          </p>
+        </div>
       </div>
     </section>
   );
 }
 
+
 function Footer() {
   return (
     <footer className="border-t bg-white">
       <div className="mx-auto max-w-7xl px-4 py-8 grid md:grid-cols-3 gap-6 items-center">
-        {/* Bloc infos société */}
         <div>
           <div className="font-semibold">FRH Pro</div>
           <div className="text-sm text-gray-500">Relamping LED • CEE • Corse & DOM-TOM</div>
         </div>
-
-        {/* Bloc copyright */}
         <div className="text-sm text-gray-600">
-          © {new Date().getFullYear()} • Tous droits réservés • {" "}
-          <a className="underline" href="#">Mentions légales</a>
+          © {new Date().getFullYear()} • Tous droits réservés •{" "}
+          <a className="underline" href="#mentions-legales">Mentions légales</a>
         </div>
-
-        {/* Bloc contact */}
         <div className="flex gap-3 justify-start md:justify-end">
-          <a
-            href="mailto:contact@frh-pro.fr"
-            className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700"
-          >
-            contact@frh-pro.fr
-          </a>
-          <a
-            href="tel:+33695151031"
-            className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700"
-          >
-            0695151031
-          </a>
-          <a
-            href="https://wa.me/33695151031"
-            className="rounded-xl bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700"
-          >
-            WhatsApp
-          </a>
+          <a href="mailto:contact@frh-pro.fr" className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700">contact@frh-pro.fr</a>
+          <a href="tel:+33695151031" className="rounded-xl border px-4 py-2 hover:border-emerald-600 hover:text-emerald-700">06 95 15 10 31</a>
+          <a href="https://wa.me/33695151031" className="rounded-xl bg-emerald-600 px-4 py-2 text-white shadow hover:bg-emerald-700">WhatsApp</a>
         </div>
       </div>
     </footer>
