@@ -571,7 +571,7 @@ function MentionsLegales() {
           {/* Informations légales */}
           <h3 className="text-lg font-semibold mt-4">Informations légales</h3>
           <p>
-            Le site, accessible à l’adresse URL <a className="underline" href="https://www.frh-pro.fr" target="_blank" rel="noreferrer">www.frh-pro.fr</a> (ci-après le « Site ») est édité par
+            Le site, accessible à l’adresse URL <a className="underline" href="https://www.frh-led.fr" target="_blank" rel="noreferrer">www.frh-pro.fr</a> (ci-après le « Site ») est édité par
             <strong> FRANCE RENOV HABITAT ENVIRONNEMENT</strong> (ci-après l’« Éditeur »), exerçant sous la forme d’une société par actions simplifiée à associé unique,
             au capital social de 30 000,00 €, dont le siège social est situé au 196 avenue Jean Lolive, 93500 Pantin, immatriculée au RCS de Bobigny sous le numéro
             890 493 737 (SIRET 89049373700013), TVA intracommunautaire FR 868 279 583 98.
