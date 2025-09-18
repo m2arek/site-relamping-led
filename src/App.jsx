@@ -609,7 +609,7 @@ ${message}`;
               />
             </Field>
 
-            <Field label="Puissance par point (W) — si connu">
+            <Field label="Puissance par point (Watt) ">
               <input
                 name="puissance"
                 type="number"
