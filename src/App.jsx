@@ -508,17 +508,41 @@ function About() {
 }
 
 // === Contact (formulaire professionnel + envoi mailto) ===
+// === Contact (formulaire professionnel + envoi mailto) ===
 function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const entreprise = form.entreprise.value;
-    const responsable = form.responsable.value;
-    const telephone = form.telephone.value;
-    const email = form.email.value;
-    const message = form.message.value;
 
-    const mailtoLink = `mailto:contact@frh-pro.fr?subject=Demande%20de%20contact%20(${entreprise})&body=Entreprise:%20${entreprise}%0ANom%20du%20responsable:%20${responsable}%0ATéléphone:%20${telephone}%0AEmail:%20${email}%0A%0AMessage:%0A${message}`;
+    const entreprise  = form.entreprise.value;
+    const responsable = form.responsable.value;
+    const telephone   = form.telephone.value;
+    const email       = form.email.value;
+
+    // Nouveaux champs
+    const surface     = form.surface.value;
+    const points      = form.points.value;
+    const puissance   = form.puissance.value;
+
+    const message     = form.message.value;
+
+    const subject = `Demande de contact (${entreprise})`;
+
+    const body =
+`Entreprise: ${entreprise}
+Nom du responsable: ${responsable}
+Téléphone: ${telephone}
+Email: ${email}
+
+Surface du bâtiment (m²): ${surface || "-"}
+Nombre de points lumineux: ${points || "-"}
+Puissance par point (W): ${puissance || "-"}
+
+Message:
+${message}`;
+
+    const mailtoLink =
+      `mailto:contact@frh-pro.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     window.location.href = mailtoLink;
   };
@@ -528,20 +552,75 @@ function Contact() {
       <div className="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold">Contact Professionnel</h2>
-          <p className="mt-3 text-gray-600">Parlez‑nous de votre site et recevez une estimation d’économies et de prime CEE.</p>
+          <p className="mt-3 text-gray-600">
+            Parlez-nous de votre site et recevez une estimation d’économies et de prime CEE.
+          </p>
           <div className="mt-6 space-y-2 text-gray-700">
-            <div><FaPhone className="inline mr-2" /> <span className="font-medium">Téléphone :</span> <a className="underline" href="tel:+33695151031">06 95 15 10 31</a></div>
-            <div><FaEnvelope className="inline mr-2" /> <span className="font-medium">Email :</span> <a className="underline" href="mailto:contact@frh-pro.fr">contact@frh-pro.fr</a></div>
-            <div><FaWhatsapp className="inline mr-2" /> <span className="font-medium">WhatsApp :</span> <a className="underline" href="https://wa.me/33695151031" target="_blank" rel="noreferrer">Discuter maintenant</a></div>
+            <div>
+              <FaPhone className="inline mr-2" />
+              <span className="font-medium">Téléphone :</span>{" "}
+              <a className="underline" href="tel:+33695151031">06 95 15 10 31</a>
+            </div>
+            <div>
+              <FaEnvelope className="inline mr-2" />
+              <span className="font-medium">Email :</span>{" "}
+              <a className="underline" href="mailto:contact@frh-pro.fr">contact@frh-pro.fr</a>
+            </div>
+            <div>
+              <FaWhatsapp className="inline mr-2" />
+              <span className="font-medium">WhatsApp :</span>{" "}
+              <a className="underline" href="https://wa.me/33695151031" target="_blank" rel="noreferrer">
+                Discuter maintenant
+              </a>
+            </div>
           </div>
         </div>
+
         <form onSubmit={handleSubmit} className="rounded-2xl border bg-gray-50 p-6 shadow-sm grid gap-4">
           <Field label="Nom de l'entreprise">
             <input name="entreprise" required className="w-full rounded-xl border px-3 py-2" />
           </Field>
+
           <Field label="Nom du responsable">
             <input name="responsable" required className="w-full rounded-xl border px-3 py-2" />
           </Field>
+
+          {/* Ligne à 3 colonnes : Surface / Points / Puissance */}
+          <div className="grid sm:grid-cols-3 gap-4">
+            <Field label="Surface du bâtiment (m²)">
+              <input
+                name="surface"
+                type="number"
+                min={0}
+                step="1"
+                placeholder="ex. 300"
+                className="w-full rounded-xl border px-3 py-2"
+              />
+            </Field>
+
+            <Field label="Nombre de points lumineux">
+              <input
+                name="points"
+                type="number"
+                min={0}
+                step="1"
+                placeholder="ex. 80"
+                className="w-full rounded-xl border px-3 py-2"
+              />
+            </Field>
+
+            <Field label="Puissance par point (W) — si connu">
+              <input
+                name="puissance"
+                type="number"
+                min={0}
+                step="1"
+                placeholder="ex. 58"
+                className="w-full rounded-xl border px-3 py-2"
+              />
+            </Field>
+          </div>
+
           <div className="grid sm:grid-cols-2 gap-4">
             <Field label="Téléphone">
               <input name="telephone" required className="w-full rounded-xl border px-3 py-2" />
@@ -550,16 +629,24 @@ function Contact() {
               <input type="email" name="email" required className="w-full rounded-xl border px-3 py-2" />
             </Field>
           </div>
+
           <Field label="Votre message">
             <textarea name="message" rows={4} className="w-full rounded-xl border px-3 py-2" required />
           </Field>
-          <button type="submit" className="rounded-2xl bg-emerald-600 px-5 py-2.5 text-white shadow hover:bg-emerald-700">Envoyer</button>
-          <p className="text-xs text-gray-500">En envoyant ce formulaire, vous acceptez d’être recontacté. Aucune donnée partagée à des tiers.</p>
+
+          <button type="submit" className="rounded-2xl bg-emerald-600 px-5 py-2.5 text-white shadow hover:bg-emerald-700">
+            Envoyer
+          </button>
+
+          <p className="text-xs text-gray-500">
+            En envoyant ce formulaire, vous acceptez d’être recontacté. Aucune donnée partagée à des tiers.
+          </p>
         </form>
       </div>
     </section>
   );
 }
+
 
 function MentionsLegales() {
   return (
