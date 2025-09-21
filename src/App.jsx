@@ -510,46 +510,21 @@ function About() {
 // === Contact (formulaire professionnel + envoi mailto) ===
 // === Contact (formulaire professionnel + envoi mailto) ===
 function Contact() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-
-    const entreprise  = form.entreprise.value;
-    const responsable = form.responsable.value;
-    const telephone   = form.telephone.value;
-    const email       = form.email.value;
-
-    // Nouveaux champs
-    const surface     = form.surface.value;
-    const points      = form.points.value;
-    const puissance   = form.puissance.value;
-
-    const message     = form.message.value;
-
-    const subject = `Demande de contact (${entreprise})`;
-
-    const body =
-`Entreprise: ${entreprise}
-Nom du responsable: ${responsable}
-Téléphone: ${telephone}
-Email: ${email}
-
-Surface du bâtiment (m²): ${surface || "-"}
-Nombre de points lumineux: ${points || "-"}
-Puissance par point (W): ${puissance || "-"}
-
-Message:
-${message}`;
-
-    const mailtoLink =
-      `mailto:contact@frh-pro.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailtoLink;
-  };
+  // Charge le script Tally une seule fois
+  useEffect(() => {
+    const src = "https://tally.so/widgets/embed.js";
+    if (!document.querySelector(`script[src="${src}"]`)) {
+      const s = document.createElement("script");
+      s.src = src;
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  }, []);
 
   return (
     <section id="contact" className="py-16">
       <div className="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-10 items-start">
+        {/* Colonne gauche : infos de contact (on garde tes icônes) */}
         <div>
           <h2 className="text-2xl md:text-3xl font-bold">Contact Professionnel</h2>
           <p className="mt-3 text-gray-600">
@@ -576,76 +551,32 @@ ${message}`;
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-2xl border bg-gray-50 p-6 shadow-sm grid gap-4">
-          <Field label="Nom de l'entreprise">
-            <input name="entreprise" required className="w-full rounded-xl border px-3 py-2" />
-          </Field>
+        {/* Colonne droite : Tally inline */}
+        <div className="rounded-2xl border bg-white p-0 overflow-hidden" id="contactFormWrap">
+          <iframe
+            data-tally-src="https://tally.so/r/nWy9Pv?hideTitle=1&alignLeft=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="600"
+            frameBorder="0"
+            marginHeight="0"
+            marginWidth="0"
+            title="Formulaire de contact FRH Pro"
+          ></iframe>
+        </div>
 
-          <Field label="Nom du responsable">
-            <input name="responsable" required className="w-full rounded-xl border px-3 py-2" />
-          </Field>
-
-          {/* Ligne à 3 colonnes : Surface / Points / Puissance */}
-          <div className="grid sm:grid-cols-3 gap-4">
-            <Field label="Surface du bâtiment (m²)">
-              <input
-                name="surface"
-                type="number"
-                min={0}
-                step="1"
-                placeholder="ex. 300"
-                className="w-full rounded-xl border px-3 py-2"
-              />
-            </Field>
-
-            <Field label="Nombre de points lumineux">
-              <input
-                name="points"
-                type="number"
-                min={0}
-                step="1"
-                placeholder="ex. 80"
-                className="w-full rounded-xl border px-3 py-2"
-              />
-            </Field>
-
-            <Field label="Puissance par point (Watt) ">
-              <input
-                name="puissance"
-                type="number"
-                min={0}
-                step="1"
-                placeholder="ex. 58"
-                className="w-full rounded-xl border px-3 py-2"
-              />
-            </Field>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Field label="Téléphone">
-              <input name="telephone" required className="w-full rounded-xl border px-3 py-2" />
-            </Field>
-            <Field label="Email">
-              <input type="email" name="email" required className="w-full rounded-xl border px-3 py-2" />
-            </Field>
-          </div>
-
-          <Field label="Votre message">
-            <textarea name="message" rows={4} className="w-full rounded-xl border px-3 py-2" required />
-          </Field>
-
-          <button type="submit" className="rounded-2xl bg-emerald-600 px-5 py-2.5 text-white shadow hover:bg-emerald-700">
-            Envoyer
-          </button>
-
-          <p className="text-xs text-gray-500">
-            En envoyant ce formulaire, vous acceptez d’être recontacté. Aucune donnée partagée à des tiers.
-          </p>
-        </form>
+        {/* Lien de secours si l’iframe ne charge pas */}
+        <p className="lg:col-span-2 -mt-4 text-sm text-gray-500">
+          Si le formulaire ne s’affiche pas, ouvrez-le ici :{" "}
+          <a href="https://tally.so/r/nWy9Pv" target="_blank" rel="noopener" className="underline">
+            Formulaire FRH Pro
+          </a>.
+        </p>
       </div>
     </section>
   );
 }
+
 
 
 function MentionsLegales() {
