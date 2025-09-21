@@ -510,7 +510,7 @@ function About() {
 // === Contact (formulaire professionnel + envoi mailto) ===
 // === Contact (formulaire professionnel + envoi mailto) ===
 function Contact() {
-  // Charge le script Tally une seule fois
+  // Charge le script Tally (auto-height, popups)
   useEffect(() => {
     const src = "https://tally.so/widgets/embed.js";
     if (!document.querySelector(`script[src="${src}"]`)) {
@@ -524,7 +524,7 @@ function Contact() {
   return (
     <section id="contact" className="py-16">
       <div className="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-10 items-start">
-        {/* Colonne gauche : infos de contact (on garde tes icônes) */}
+        {/* Colonne gauche : infos */}
         <div>
           <h2 className="text-2xl md:text-3xl font-bold">Contact Professionnel</h2>
           <p className="mt-3 text-gray-600">
@@ -551,21 +551,20 @@ function Contact() {
           </div>
         </div>
 
-        {/* Colonne droite : Tally inline */}
-        <div className="rounded-2xl border bg-white p-0 overflow-hidden" id="contactFormWrap">
+        {/* Colonne droite : Tally inline (embed) */}
+        <div className="rounded-2xl border bg-white p-0">
           <iframe
-            data-tally-src="https://tally.so/r/nWy9Pv?hideTitle=1&alignLeft=1&transparentBackground=1&dynamicHeight=1"
-            loading="lazy"
+            src="https://tally.so/embed/nWy9Pv?hideTitle=1&alignLeft=1&transparentBackground=1&dynamicHeight=1"
             width="100%"
-            height="600"
+            height="820"
             frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
             title="Formulaire de contact FRH Pro"
-          ></iframe>
+            style={{ minHeight: 700 }}
+            allow="fullscreen; clipboard-write"
+          />
         </div>
 
-        {/* Lien de secours si l’iframe ne charge pas */}
+        {/* Lien de secours */}
         <p className="lg:col-span-2 -mt-4 text-sm text-gray-500">
           Si le formulaire ne s’affiche pas, ouvrez-le ici :{" "}
           <a href="https://tally.so/r/nWy9Pv" target="_blank" rel="noopener" className="underline">
@@ -576,6 +575,7 @@ function Contact() {
     </section>
   );
 }
+
 
 
 
